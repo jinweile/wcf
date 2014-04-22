@@ -1,0 +1,175 @@
+﻿*
+{
+	font-size:12px;
+	font-family:宋体;
+}
+body
+{
+	margin:0px;
+	overflow:hidden;
+}
+
+/* 顶栏 */
+div.topBar
+{
+	height:21px;
+	padding:3px;
+	background-color:#CFE6F4;
+	border:#abc0e7 1px solid;
+	border-right:#00377a 1px solid;
+	border-bottom:#00377a 1px solid;
+	text-align:left;
+}
+
+/* 工具栏 */
+div.toolBar
+{
+	float:left;
+}
+
+/* 工具按钮 */
+.toolBarBtn
+{
+	font-family:Tahoma;
+	padding:1px;
+	cursor:hand;
+	behavior:url(../js/toolBarBtn.htc);
+	border:0px;
+	filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#f7f9fd, EndColorStr=#aab7cc);
+}
+.toolBarBtnOver
+{
+	font-family:Tahoma;
+	padding:1px;
+	cursor:hand;
+	behavior:url(../js/toolBarBtn.htc);
+	border: #0a246a 1px solid;
+	padding-top:0px;
+	padding-bottom:0px;
+	background-color: #bec5d8;
+}
+
+/* 模块名称 */
+div.moduleName
+{
+	float:right;
+	font-size:14px;
+	font-weight:bold;
+	color:#000;
+	text-align:right;
+	vertical-align:text-bottom;
+	padding-right:5px;
+	padding-top:4px;
+}
+
+/* 导航区域 */
+div.navArea
+{
+	width:200px;
+	overflow:auto;
+	background-color:#eeeeee;
+	border-right:#555555 1px solid;
+	float:left;
+}
+
+/* 右侧主区域 */
+div.mainArea
+{
+	padding:15px;
+	float:right;
+}
+
+/* 横跨主区域 */
+div.crossMainArea
+{
+    width:auto;
+	overflow:auto;
+	float:left;
+}
+
+/* 表格导航栏 */
+div.gridNavbar
+{
+    border-top:#555555 1px solid;
+    padding:4px;
+    padding-bottom:5px;
+    text-align:right;
+    float:left;
+    width:100%;
+	background-color:#eeeeee;
+}
+
+/* 状态栏 */
+div.statusBar
+{
+    height:14px;
+	background-color:#666666;
+	border:#bbbbbb 1px solid;
+	border-right:#000000 1px solid;
+	border-bottom:#000000 1px solid;
+	padding:0px;
+	padding-right:8px;
+	padding-bottom:1px;
+	text-align:right;
+	color:White;
+	font-family:Tahoma;
+	font-size:11px;
+	clear:both;
+}
+
+/* 输入框 */
+.textBox
+{
+	border:#aaaaaa 1px solid;
+}
+
+/* 滚动区域 */
+div.scrollArea
+{
+    padding:1px;
+    overflow-y:auto;
+    border:#aaaaaa 1px solid;
+    background-color:#ffffff;
+}
+
+/* 红色粗体 */
+span.redSpanCheck
+{
+    font-weight:bold;
+    color:#990000;
+    width:14px;
+    text-align:center;
+}
+.redCheck
+{
+    font-weight:bold;
+    color:#990000;
+    border:#aaaaaa 1px solid;
+}
+
+
+/* 按钮 */
+input.button
+{
+    border:#7b9ebd 1px solid;
+    padding-right:5px;
+    padding-left:5px;
+    vertical-align:bottom;
+    height:20px;
+    width:80px;
+    cursor:hand;
+    filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#EBEBE5);
+}
+
+/* 警告消息 */
+div.alert
+{
+	color:#990000;
+	margin:0px;
+	padding:5px;
+	padding-bottom:3px;
+	border:#999999 1px solid;
+	background-color:#e2e2e2;
+	height:14px;
+	text-align:left;
+}

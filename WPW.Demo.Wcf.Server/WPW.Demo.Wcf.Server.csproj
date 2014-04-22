@@ -73,10 +73,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\cat-client.net\Cat.Net.csproj">
-      <Project>{7B5F7994-F1D1-494D-85B9-935A478591AD}</Project>
-      <Name>Cat.Net</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FrameWork\FrameWork.csproj">
       <Project>{37010614-A710-4B87-BA74-0487B8E3ED0A}</Project>
       <Name>FrameWork</Name>

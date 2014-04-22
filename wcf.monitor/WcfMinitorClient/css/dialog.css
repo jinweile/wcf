@@ -1,0 +1,123 @@
+﻿*
+{
+	font-size:12px;
+	font-family:宋体;
+}
+body
+{
+    margin:0px;
+	overflow:hidden;
+    background-color:#eeeeee;
+}
+
+/* 标题、描述 */
+div.headerArea
+{
+    border:#abc0e7 1px solid;
+    border-right:#00377a 1px solid;
+    border-bottom:#00377a 1px solid;
+    font-size:12pt;
+    vertical-align:top;
+    color:#ffffff;
+    background-color:#7288ac;
+    padding:8px;
+}
+div.header
+{
+    padding-left:6px;
+    font-weight:bold;
+    font-size:11pt;
+}
+div.headerDesc
+{
+	padding-top:4px;
+	padding-left:40px;
+    font-size:9pt;
+}
+
+/* 中间主区域 */
+div.main
+{
+	padding:10px;
+}
+
+/* 滚动树 */
+div.navTree
+{
+	overflow:auto;
+	padding:5px;
+	border-bottom:#888888 1px solid;
+	margin-bottom:8px;
+}
+
+/* 警告消息 */
+div.alert
+{
+	color:#990000;
+	margin:0px;
+	margin-left:10px;
+	margin-right:10px;
+	padding:5px;
+	padding-bottom:3px;
+	border:#999999 1px solid;
+	background-color:#e2e2e2;
+	height:14px;
+	text-align:left;
+}
+
+/* 底端按钮区域 */
+div.btnArea
+{
+	border-top:#888888 1px solid;
+	padding:10px;
+	text-align:right;
+	margin-top:8px;
+}
+div.btnArea_2
+{
+	padding:10px;
+	padding-top:2px;
+	text-align:right;
+}
+
+/* 输入框 */
+.textBox
+{
+	border:#aaaaaa 1px solid;
+}
+/* 输入框（必输项） */
+.textBoxRed
+{
+	border:#990000 1px solid;
+}
+
+/* 按钮 */
+input.button
+{
+    border:#7b9ebd 1px solid;
+    padding-right:5px;
+    padding-left:5px;
+    vertical-align:bottom;
+    height:20px;
+    width:80px;
+    cursor:hand;
+    filter:progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#EBEBE5);
+}
+
+/* 日历按钮 */
+.calendarButton
+{
+    border:0px;
+	cursor:hand;
+    background-color:Transparent;
+    height:16px;
+}
+
+/* 滚动区域 */
+div.scrollArea
+{
+    padding:1px;
+    overflow-y:auto;
+    border:#aaaaaa 1px solid;
+    background-color:#ffffff;
+}

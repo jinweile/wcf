@@ -1,0 +1,18 @@
+﻿.popup
+{
+    position: absolute;
+    border: 1px solid black;
+    background: #eee;
+    text-align: left;
+}
+.popup .item
+{
+    padding: 3px 8px;
+    font-family: tahoma, verdana, sans-serif;
+    font-size: 11px;
+    cursor: default;
+}
+.popup .selected
+{
+    background: #ccc;
+}
