@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPW.Demo.Wcf.Model", "WPW.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrameWork", "FrameWork\FrameWork.csproj", "{37010614-A710-4B87-BA74-0487B8E3ED0A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "wcf.monitor", "wcf.monitor", "{D2467C15-BA5D-4AF2-9797-475EDD208F93}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfStatistics.Dao", "wcf.monitor\WcfStatistics.Dao\WcfStatistics.Dao.csproj", "{EAB20CCF-D973-497A-96D9-A3D198F2AB27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfStatistics.Model", "wcf.monitor\WcfStatistics.Model\WcfStatistics.Model.csproj", "{D3DD1E33-76C0-4E03-9272-BE60BF5AAA01}"
@@ -43,8 +41,6 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WcfMinitorClient", "wcf.mon
 		VWDPort = "14342"
 		VWDVirtualPath = "/"
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cat.net", "cat.net", "{DB77F90F-FC78-47C9-9FAD-67D3F5607F80}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cat.Net", "cat-client.net\Cat.Net.csproj", "{7B5F7994-F1D1-494D-85B9-935A478591AD}"
 EndProject
@@ -165,13 +161,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{EAB20CCF-D973-497A-96D9-A3D198F2AB27} = {D2467C15-BA5D-4AF2-9797-475EDD208F93}
-		{D3DD1E33-76C0-4E03-9272-BE60BF5AAA01} = {D2467C15-BA5D-4AF2-9797-475EDD208F93}
-		{462C5FA0-AC3C-4EF7-A7CD-01A17CE2CD31} = {D2467C15-BA5D-4AF2-9797-475EDD208F93}
-		{B6C58ECB-1D46-48CA-B665-5B0292E79150} = {D2467C15-BA5D-4AF2-9797-475EDD208F93}
-		{F2D08B72-CDA3-49BC-B648-FE04A224BB18} = {D2467C15-BA5D-4AF2-9797-475EDD208F93}
-		{7B5F7994-F1D1-494D-85B9-935A478591AD} = {DB77F90F-FC78-47C9-9FAD-67D3F5607F80}
 	EndGlobalSection
 EndGlobal
