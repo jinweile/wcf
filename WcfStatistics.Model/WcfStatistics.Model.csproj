@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{2E1654CE-2001-46DC-A17D-86827A322B88}</ProjectGuid>
+    <ProjectGuid>{D3DD1E33-76C0-4E03-9272-BE60BF5AAA01}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WPW.Demo.Wcf.Imp</RootNamespace>
-    <AssemblyName>WPW.Demo.Wcf.Imp</AssemblyName>
+    <RootNamespace>WcfStatistics.Model</RootNamespace>
+    <AssemblyName>WcfStatistics.Model</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
@@ -41,7 +41,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,26 +48,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UserBll.cs" />
+    <Compile Include="Batch.cs" />
+    <Compile Include="ClientConnInfo.cs" />
+    <Compile Include="ClientList.cs" />
+    <Compile Include="OperationInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\cat-client.net\Cat.Net.csproj">
-      <Project>{7b5f7994-f1d1-494d-85b9-935a478591ad}</Project>
-      <Name>Cat.Net</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FrameWork\FrameWork.csproj">
-      <Project>{37010614-A710-4B87-BA74-0487B8E3ED0A}</Project>
-      <Name>FrameWork</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WPW.Demo.Wcf.Interface\WPW.Demo.Wcf.Interface.csproj">
-      <Project>{DD150E2A-8EE0-4098-98DA-CA533DFC64A4}</Project>
-      <Name>WPW.Demo.Wcf.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WPW.Demo.Wcf.Model\WPW.Demo.Wcf.Model.csproj">
-      <Project>{8B385AFB-5690-41D5-B275-DB254210989D}</Project>
-      <Name>WPW.Demo.Wcf.Model</Name>
-    </ProjectReference>
+    <Compile Include="WcfServer.cs" />
+    <Compile Include="WcfServerPerformance.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

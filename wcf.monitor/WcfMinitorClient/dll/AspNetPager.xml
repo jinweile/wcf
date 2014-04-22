@@ -1,0 +1,1436 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AspNetPager</name>
+    </assembly>
+    <members>
+        <member name="F:Wuqi.Webdiyer.AboutForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AboutForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AboutForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.AspNetPager">
+            <summary>
+      用于ASP.NET Web应用程序中对数据进行分页的的服务器控件。
+    </summary><remarks>
+      不同于DataGrid或GridView等带分页功能的数据绑定控件，AspNetPager分页控件本身并不显示任何数据，而只显示分页导航元素，数据在页面上的显示方式与该控件无关。AspNetPager分页控件可以为GridView、DataGrid、DataList、Repeater以及自定义的数据绑定控件进行分页。AspNetPager不仅仅是一个分页控件，它还可以实现如图片浏览等程序中的前一页后一页等导航功能。
+      <p>AspNetPager控件的分页方法和GridView非常相似，但AspNetPager的分页功能更为灵活、强大。AspNetPager分页控件不仅仅支持默认的PostBack方式分页，它还支持通过Url来实现分页以及Url重写功能，这使得访问者可以直接输入相应的Url来访问任何页面，并且搜索引擎也可以直接检索每个页面，若使用DataGrid或GridView等.net框架自带的数据绑定控件的分页功能，这些是无法实现的。</p><p>
+        要使用 AspNetPager 分页控件，必须最少指定它的 <see cref="P:Wuqi.Webdiyer.AspNetPager.RecordCount"/> 属性的值，另外如果需要，指定并编写 <see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanging"/> 或 <see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanged"/> 事件的处理程序，可以在PageChanging事件处理程序中取消分页事件，在PageChanged事件处理程序中绑定数据或实现自定义的数据呈现逻辑。
+        <see cref="P:Wuqi.Webdiyer.AspNetPager.RecordCount"/> 属性指定要分页的所有数据的总项数，若未指定该值或该值小于等于 <see cref="P:Wuqi.Webdiyer.AspNetPager.PageSize"/> ，即要分页的数据只有一页，则AspNetPager控件默认会自动隐藏而不显示任何内容，若需在只有一页数据的情况下显示AspNetPager分页控件，可以将它的AlwaysShow属性设为true即可。
+      </p>
+    </remarks><example>
+      以下示例说明如何用AspNetPager对Repeater进行分页。
+      <code>
+        <![CDATA[
+<%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
+<%@Import NameSpace="System.Data"%>
+<%@Import NameSpace="System.Data.SqlClient"%>
+<script runat="server" Language="C#">
+void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            int totalOrders = (int)SqlHelper.ExecuteScalar(CommandType.StoredProcedure, "P_GetOrderNumber");
+            AspNetPager1.RecordCount = totalOrders;
+            bindData();
+        }
+    }
+
+ void bindData()
+    {
+        Repeater1.DataSource = SqlHelper.ExecuteReader(CommandType.StoredProcedure,"P_GetPagedOrders2005",
+            new SqlParameter("@startIndex", AspNetPager1.StartRecordIndex),
+            new SqlParameter("@pageSize", AspNetPager1.PageSize));
+        Repeater1.DataBind();
+    }
+
+ void AspNetPager1_PageChanged(object src, EventArgs e)
+    {
+        bindData();
+    }
+</script>
+<HTML><HEAD>
+<TITLE> AspNetPager Samples </TITLE>
+<META NAME="Author" CONTENT="Webdiyer (en.webdiyer.com)">
+</HEAD>
+
+<BODY>
+<form runat="server">
+        <asp:Repeater ID="Repeater1" runat="server">
+        <HeaderTemplate>
+        <table width="100%" border="1" cellspacing="0" cellpadding="4" style="border-collapse:collapse">
+        <tr style="backGround-color:#CCCCFF"><th style="width:15%"><asp:Literal ID="Literal1" runat="server" Text="<%$Resources:LocalizedText,orderid%>" /></th><th style="width:15%"><asp:Literal ID="Literal3" runat="server" Text="<%$Resources:LocalizedText,orderdate%>" /></th><th style="width:30%"><asp:Literal ID="Literal5" runat="server" Text="<%$Resources:LocalizedText,companyname%>" /></th><th style="width:20%"><asp:Literal ID="Literal2" runat="server" Text="<%$Resources:LocalizedText,customerid%>" /></th><th style="width:20%"><asp:Literal ID="Literal4" runat="server" Text="<%$Resources:LocalizedText,employeename%>" /></th></tr>
+        </HeaderTemplate>
+        <ItemTemplate>
+        <tr style="background-color:#FAF3DC">
+        <td><%#DataBinder.Eval(Container.DataItem,"orderid")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"orderdate","{0:d}")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem, "companyname")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"customerid")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"employeename")%></td>
+        </tr>
+        </ItemTemplate>
+		<FooterTemplate>
+        </table>
+        </FooterTemplate>
+        </asp:Repeater>
+  <webdiyer:AspNetPager ID="AspNetPager1" runat="server" Width="100%" HorizontalAlign="right" PageSize="8" OnPageChanged="AspNetPager1_PageChanged">
+        </webdiyer:AspNetPager>
+		</form>
+</BODY>
+</HTML>
+ ]]>
+      </code><p>该示例所用的Sql Server存储过程代码如下（仅适用于SQL Server 2005）：</p><code>
+        <![CDATA[
+CREATE PROCEDURE P_GetPagedOrders2005
+	@startIndex INT, 
+    @pageSize INT 
+AS
+begin
+WITH orderList AS ( 
+SELECT ROW_NUMBER() OVER (ORDER BY O.orderid DESC)AS Row, O.orderid,O.orderdate,O.customerid,C.CompanyName,E.FirstName+' '+E.LastName as EmployeeName 
+from orders O
+left outer join Customers C
+on O.CustomerID=C.CustomerID
+left outer join Employees E
+on O.EmployeeID=E.EmployeeID)
+
+SELECT orderid,orderdate,customerid,companyName,employeeName
+FROM orderlist
+WHERE Row between @startIndex and @startIndex+@pageSize-1
+end
+ ]]>
+      </code>
+    </example>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.OnInit(System.EventArgs)">
+            <summary>
+      重写 <see cref="M:System.Web.UI.Control.OnInit(System.EventArgs)"/> 方法。
+    </summary><param name="e">
+      包含事件数据的 <see cref="T:System.EventArgs"/> 对象。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.OnLoad(System.EventArgs)">
+            <summary>
+      重写 <see cref="M:System.Web.UI.Control.OnLoad(System.EventArgs)"/> 方法。
+    </summary><param name="e">
+      包含事件数据的 <see cref="T:System.EventArgs"/> 对象。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.AddAttributesToRender(System.Web.UI.HtmlTextWriter)">
+            <summary>
+      重写<see cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)"/> 方法，将需要呈现的 HTML 属性和样式添加到指定的 <see cref="T:System.Web.UI.HtmlTextWriter"/> 中
+    </summary><param name="writer">
+      <see cref="T:System.Web.UI.HtmlTextWriter"/>，表示要在客户端呈现 HTML 内容的输出流。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.RenderBeginTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+      重写 <see cref="M:System.Web.UI.WebControls.WebControl.RenderBeginTag(System.Web.UI.HtmlTextWriter)"/> 方法，将 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 控件的 HTML 开始标记输出到指定的 <see cref="T:System.Web.UI.HtmlTextWriter"/> 编写器中。
+    </summary><param name="writer">
+      <see cref="T:System.Web.UI.HtmlTextWriter"/>，表示要在客户端呈现 HTML 内容的输出流。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.RenderEndTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+      重写 <see cref="M:System.Web.UI.WebControls.WebControl.RenderEndTag(System.Web.UI.HtmlTextWriter)"/> 方法，将 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 控件的 HTML 结束标记输出到指定的 <see cref="T:System.Web.UI.HtmlTextWriter"/> 编写器中。
+    </summary><param name="writer">
+      <see cref="T:System.Web.UI.HtmlTextWriter"/>，表示要在客户端呈现 HTML 内容的输出流。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.RenderContents(System.Web.UI.HtmlTextWriter)">
+            <summary>
+      重写 <see cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)"/> 方法，将控件的内容呈现到指定 <see cref="T:System.Web.UI.HtmlTextWriter"/> 的编写器中。
+    </summary><param name="writer">
+      <see cref="T:System.Web.UI.HtmlTextWriter"/>，表示要在客户端呈现 HTML 内容的输出流。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.GetHrefString(System.Int32)">
+            <summary>
+            Get the navigation url for the paging button.
+            </summary>
+            <param name="pageIndex">the page index correspond to the button.</param>
+            <returns>href string for the paging navigation button.</returns>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.GetCustomInfoHtml(System.String)">
+            <summary>
+            Replace the property placeholders in the CustomInfoHTML with the property values repectively
+            </summary>
+            <param name="origText">original CustomInfoHTML</param>
+            <returns></returns>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.ConvertQueryStringToCollection(System.String)">
+            <summary>
+            Convert raw query string to NameValueCollection
+            </summary>
+            <param name="s">raw query string</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.BuildUrlString(System.String)">
+            <summary>
+            add paging parameter and value to the current url or change parameter value if it already exists when using url paging mode
+            </summary>
+            <param name="pageIndex">page index parameter to be added</param>
+            <returns>href string for the navigattion button</returns>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.CreateNavigationButton(System.Web.UI.HtmlTextWriter,Wuqi.Webdiyer.AspNetPager.NavigationButton)">
+            <summary>
+            Create first, prev, next or last button.
+            </summary>
+            <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriter"/> that represents the output stream to render HTML content on the client.</param>
+            <param name="btn">the navigation button</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.AddToolTip(System.Web.UI.HtmlTextWriter,System.Int32)">
+            <summary>
+            Add tool tip text to navigation button.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.AddPagingButtonLayoutTag(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            add paging button layout tag
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.CreateNumericButton(System.Web.UI.HtmlTextWriter,System.Int32)">
+            <summary>
+            Create numeric paging button.
+            </summary>
+            <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriter"/> that represents the output stream to render HTML content on the client.</param>
+            <param name="index">the page index correspond to the paging button</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.CreateNumericImages(System.Web.UI.HtmlTextWriter,System.Int32,System.Boolean)">
+            <summary>
+            Create numeric image button.
+            </summary>
+            <param name="writer">A <see cref="T:System.Web.UI.HtmlTextWriter"/> that represents the output stream to render HTML content on the client.</param>
+            <param name="index">the page index correspond to the button.</param>
+            <param name="isCurrent">if the page index correspond to the button is the current page index</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.CreateMoreButton(System.Web.UI.HtmlTextWriter,System.Int32)">
+            <summary>
+            create more (...) button.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.writeSpacingStyle(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Add paging button spacing styles to HtmlTextWriter
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.AddHyperlinkTarget(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            add target attribute to paging hyperlink
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.AddClassAndStyle(System.String,System.String,System.Web.UI.HtmlTextWriter)">
+            <summary>
+            add css class and style attribute to HtmlTextWriter
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.OnPageChanging(Wuqi.Webdiyer.PageChangingEventArgs)">
+            <summary>
+      引发 <see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanging"/> 事件。这使您可以为事件提供自定义处理程序。
+    </summary><param name="e">
+      一个包含事件数据 <see cref="T:Wuqi.Webdiyer.PageChangingEventArgs"/> 。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.OnPageChanged(System.EventArgs)">
+            <summary>
+      引发 <see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanged"/> 事件。这使您可以为事件提供自定义处理程序。
+    </summary><param name="e">
+      一个包含事件数据 <see cref="T:System.EventArgs"/> 。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.GoToPage(System.Int32)">
+            <summary>
+      引发<see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanging"/>和<see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanged"/>事件，跳转到指定页面。
+    </summary><param name="pageIndex">
+      要跳转到的页索引。
+    </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.RaisePostBackEvent(System.String)">
+            <summary>
+      实现<see cref="!:IPostBackEventHandler"/> 接口，使 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 控件能够处理将窗体发送到服务器时引发的事件。
+    </summary><param name="args">表示要传递到事件处理程序的可选事件参数的 String。 </param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+      实现 <see cref="!:IPostBackDataHandler"/> 接口，为 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 服务器控件处理回发数据。
+    </summary><param name="pkey">控件的主要标识符。</param><param name="pcol">所有传入名称值的集合。</param><returns>如果服务器控件的状态在回发发生后更改，则为 true；否则为 false。</returns>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPager.RaisePostDataChangedEvent">
+            <summary>
+      实现 <see cref="!:IPostBackDataHandler"/> 接口，用信号要求服务器控件对象通知 ASP.NET 应用程序该控件的状态已更改。
+    </summary>
+        </member>
+        <member name="E:Wuqi.Webdiyer.AspNetPager.PageChanging">
+            <summary>
+      PostBack方式分页时，当页导航元素之一被单击或用户手工输入页索引提交时发生，Url方式分页时，页面第一次加载时发生。
+    </summary><remarks>
+      该事件在 AspNetPager 处理分页操作前引发，因此可以在事件处理程序中根据需要取消分页操作。
+    </remarks><example>
+      下面的示例显示如何为PageChanging事件指定事件处理程序，当用户选中页面上的“取消分页”复选框时，取消分页操作：
+      <code>
+        <![CDATA[
+<%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
+<%@Import NameSpace="System.Data" %>
+<%@Import Namespace="System.Data.SqlClient" %>
+<script runat="server" Language="C#">
+void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            int totalOrders = (int)SqlHelper.ExecuteScalar(CommandType.StoredProcedure, "P_GetOrderNumber");
+            AspNetPager1.RecordCount = totalOrders;
+            bindData();
+        }
+    }
+
+ void bindData()
+    {
+        Repeater1.DataSource = SqlHelper.ExecuteReader(CommandType.StoredProcedure,"P_GetPagedOrders2005",
+            new SqlParameter("@startIndex", AspNetPager1.StartRecordIndex),
+            new SqlParameter("@pageSize", AspNetPager1.PageSize));
+        Repeater1.DataBind();
+    }
+
+void AspNetPager1_PageChanging(object src,PageChangingEventArgs e){
+ Response.Write("PageChanging事件被引发，新页面的索引是：" + e.NewPageIndex);
+if(CheckBox1.Checked){
+	e.Cancel=true;
+    Response.Write("<br/>分页操作被取消");
+ }
+}
+
+ void AspNetPager1_PageChanged(object src, EventArgs e)
+    {
+        bindData();
+        Response.Write("<br/>PageChanged事件被引发，当前页索引是："+AspNetPager1.CurrentPageIndex);
+    }
+</script>
+<HTML><HEAD>
+<TITLE> AspNetPager Samples </TITLE>
+<META NAME="Author" CONTENT="Webdiyer (www.webdiyer.com)">
+</HEAD>
+
+<BODY>
+<form runat="server">
+    <webdiyer:aspnetpager id="AspNetPager1" runat="server" OnPageChanging="AspNetPager1_PageChanging" onpagechanged="AspNetPager1_PageChanged" 
+    Width="100%" HorizontalAlign="center"></webdiyer:aspnetpager>
+    <asp:CheckBox ID="CheckBox1" runat="server" Text="取消分页" />
+        <asp:Repeater ID="Repeater1" runat="server">
+        <HeaderTemplate>
+        <table width="100%" border="1" cellspacing="0" cellpadding="4" style="border-collapse:collapse">
+        <tr style="backGround-color:#CCCCFF"><th style="width:15%"><asp:Literal ID="Literal1" runat="server" Text="<%$Resources:LocalizedText,orderid%>" /></th><th style="width:15%"><asp:Literal ID="Literal3" runat="server" Text="<%$Resources:LocalizedText,orderdate%>" /></th><th style="width:30%"><asp:Literal ID="Literal5" runat="server" Text="<%$Resources:LocalizedText,companyname%>" /></th><th style="width:20%"><asp:Literal ID="Literal2" runat="server" Text="<%$Resources:LocalizedText,customerid%>" /></th><th style="width:20%"><asp:Literal ID="Literal4" runat="server" Text="<%$Resources:LocalizedText,employeename%>" /></th></tr>
+        </HeaderTemplate>
+        <ItemTemplate>
+        <tr style="background-color:#FAF3DC">
+        <td><%#DataBinder.Eval(Container.DataItem,"orderid")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"orderdate","{0:d}")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem, "companyname")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"customerid")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"employeename")%></td>
+        </tr>
+        </ItemTemplate>
+		<FooterTemplate>
+        </table>
+        </FooterTemplate>
+        </asp:Repeater>
+        <webdiyer:AspNetPager ID="AspNetPager2" runat="server" CloneFrom="AspNetPager1">
+        </webdiyer:AspNetPager>
+		</form>
+</BODY>
+</HTML>
+
+        ]]>
+      </code>
+    </example>
+        </member>
+        <member name="E:Wuqi.Webdiyer.AspNetPager.PageChanged">
+            <summary>
+      PostBack方式分页时，当页导航元素之一被单击或用户手工输入页索引提交时发生，Url方式分页时，页面第一次加载时发生。
+    </summary><remarks>
+      该事件被引发时，AspNetPager 已完成分页操作。
+    </remarks><example>
+      下面的示例显示如何为PageChanged事件指定和编写事件处理程序，在该事件处理程序中重新绑定Repeater上显示的数据：
+      <code>
+        <![CDATA[
+<%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
+<%@Import NameSpace="System.Data"%>
+<%@Import NameSpace="System.Data.SqlClient"%>
+<script runat="server" Language="C#">
+void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            int totalOrders = (int)SqlHelper.ExecuteScalar(CommandType.StoredProcedure, "P_GetOrderNumber");
+            AspNetPager1.RecordCount = totalOrders;
+            bindData();
+        }
+    }
+
+ void bindData()
+    {
+        Repeater1.DataSource = SqlHelper.ExecuteReader(CommandType.StoredProcedure,"P_GetPagedOrders2005",
+            new SqlParameter("@startIndex", AspNetPager1.StartRecordIndex),
+            new SqlParameter("@pageSize", AspNetPager1.PageSize));
+        Repeater1.DataBind();
+    }
+
+ void AspNetPager1_PageChanged(object src, EventArgs e)
+    {
+        bindData();
+    }
+</script>
+<HTML><HEAD>
+<TITLE> AspNetPager Samples </TITLE>
+<META NAME="Author" CONTENT="Webdiyer (www.webdiyer.com)">
+</HEAD>
+
+<BODY>
+<form runat="server">
+  <webdiyer:AspNetPager ID="AspNetPager1" runat="server" Width="100%" HorizontalAlign="right" PageSize="8" OnPageChanged="AspNetPager1_PageChanged">
+        </webdiyer:AspNetPager>
+        <asp:Repeater ID="Repeater1" runat="server">
+        <HeaderTemplate>
+        <table width="100%" border="1" cellspacing="0" cellpadding="4" style="border-collapse:collapse">
+        <tr style="backGround-color:#CCCCFF"><th style="width:15%"><asp:Literal ID="Literal1" runat="server" Text="<%$Resources:LocalizedText,orderid%>" /></th><th style="width:15%"><asp:Literal ID="Literal3" runat="server" Text="<%$Resources:LocalizedText,orderdate%>" /></th><th style="width:30%"><asp:Literal ID="Literal5" runat="server" Text="<%$Resources:LocalizedText,companyname%>" /></th><th style="width:20%"><asp:Literal ID="Literal2" runat="server" Text="<%$Resources:LocalizedText,customerid%>" /></th><th style="width:20%"><asp:Literal ID="Literal4" runat="server" Text="<%$Resources:LocalizedText,employeename%>" /></th></tr>
+        </HeaderTemplate>
+        <ItemTemplate>
+        <tr style="background-color:#FAF3DC">
+        <td><%#DataBinder.Eval(Container.DataItem,"orderid")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"orderdate","{0:d}")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem, "companyname")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"customerid")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"employeename")%></td>
+        </tr>
+        </ItemTemplate>
+		<FooterTemplate>
+        </table>
+        </FooterTemplate>
+        </asp:Repeater>
+        <webdiyer:AspNetPager ID="AspNetPager2" runat="server" CloneFrom="AspNetPager1">
+        </webdiyer:AspNetPager>
+		</form>
+</BODY>
+</HTML>
+ ]]>
+      </code><p>该示例所用的Sql Server存储过程代码如下（仅适用于SQL Server 2005）：</p><code>
+        <![CDATA[
+CREATE PROCEDURE P_GetPagedOrders2005
+	@startIndex INT, 
+    @pageSize INT 
+AS
+begin
+WITH orderList AS ( 
+SELECT ROW_NUMBER() OVER (ORDER BY O.orderid DESC)AS Row, O.orderid,O.orderdate,O.customerid,C.CompanyName,E.FirstName+' '+E.LastName as EmployeeName 
+from orders O
+left outer join Customers C
+on O.CustomerID=C.CustomerID
+left outer join Employees E
+on O.EmployeeID=E.EmployeeID)
+
+SELECT orderid,orderdate,customerid,companyName,employeeName
+FROM orderlist
+WHERE Row between @startIndex and @startIndex+@pageSize-1
+end
+ ]]>
+      </code>
+    </example>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowNavigationToolTip">
+            <summary>
+      获取或设置一个值，该值批示当鼠标指针悬停在导航按钮上时是否显示工具提示。
+    </summary><value>
+      boolean值，默认值为false，即不显示工具提示。
+    </value>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.NavigationToolTipTextFormatString">
+            <summary>
+      获取或设置导航按钮工具提示文本的格式。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.NumericButtonTextFormatString">
+            <summary>
+      获取或设置页索引数值导航按钮上文本的显示格式。
+    </summary><value>
+      字符串，指定页索引数值按钮上文本的显示格式，默认值为<see cref="F:System.String.Empty"/>，即未设置该属性。
+    </value><remarks>
+      使用NumericButtonTextFormatString属性指定页索引数值按钮的显示格式，如未设置该值时索引按钮文本将会是：1 2 3 ...，设置该值将改变索引按钮文本的显示格式，
+      如将该值设为“[{0}]”则索引文本会显示为：[1] [2] [3] ...，将该值设为“-{0}-”则会使索引文本变为：-1- -2- -3- ...。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CurrentPageButtonTextFormatString">
+            <summary>
+      获取或设置当前页数值导航按钮上文本的显示格式。
+    </summary><value>
+      字符串，指定当前页索引数值按钮上文本的显示格式，默认值为<see cref="F:System.String.Empty"/>，如果未设置该属性，则其值与NumericButtonTextFormatString属性值相同。
+    </value><remarks>
+      使用CurrentPageButtonTextFormatString属性指定当前页索引数值按钮文本的显示格式，如果希望当前页数值按钮的显示格式与其它数字页索引不同，则可设置该属性来自定义当前页索引文本的显示格式。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PagingButtonType">
+            <summary>
+      获取或设置分页导航按钮的类型，即使用文字还是图片。
+    </summary><remarks>
+      要使用图片按钮，您需要准备以下图片：从0到9的十个数值图片（当ShowPageIndex设为true时），第一页、上一页、下一页、最后一页及更多页（...）五个按钮图片（当ShowFirstLast及ShowPrevNext都设为true时），
+      若需要使当前页索引的数值按钮不同于别的页索引数值按钮，则还需准备当前页索引的按钮图片；
+      若需要使已禁用的第一页、上一页、下一页及最后一页按钮图片不同于正常的按钮图片，则还需准备这四个按钮在禁用状态下的图片；
+      <p>
+        <b>图片文件的命名规则如下：</b>
+      </p><p>
+        从0到9十张数值按钮图片必须命名为“数值+ButtonImageNameExtension+ButtonImageExtension”，其中的ButtonImageNameExtension可以不用设置，
+        ButtonImageExtension是图片文件的后缀名，如 .gif或 .jpg等可以在浏览器中显示的任何图片文件类型。如页索引“1”的图片文件可命名为“1.gif”或“1.jpg”，
+        当您有两套或更多套图片文件时，可以通过指定ButtonImageNameExtension属性值来区分不同套的图片，如第一套图片可以不用设ButtonImageNameExtension，则图片文件名类似于“1.gif”、“2.gif”等等，而第二套图片则设置ButtonImageNameExtension为“f”，图片文件名类似于“1f.gif”，“2f.gif”等等。
+      </p><p>第一页按钮的图片文件名以“first”开头，上一页按钮图片名以“prev”开头，下一页按钮图片名以“next”开头，最后一页按钮图片名以“last”开头，更多页按钮图片名以“more”开头，是否使用ButtonImageNameExtension取决于数值按钮的设置及是否有更多套图片。</p>
+    </remarks><example>
+      以下代码片段示例如果使用图片按钮：
+      <p>
+        <code>
+          <![CDATA[
+ <Webdiyer:AspNetPager runat="server" 
+		id="pager1" OnPageChanged="ChangePage"  
+		PagingButtonType="image" 	ImagePath="images" 
+		ButtonImageNameExtension="n" 
+		DisabledButtonImageNameExtension="g" 
+		ButtonImageExtension="gif" 
+		CpiButtonImageNameExtension="r" 
+		PagingButtonSpacing="10px"/>
+ ]]>
+        </code>
+      </p>
+    </example>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.NumericButtonType">
+            <summary>
+      获取或设置页导航数值按钮的类型，该值仅当PagingButtonType设为Image时才有效。
+    </summary><remarks>
+      当您将PagingButtonType设为Image当又不想让页索引数值按钮使用图片时，可以将该值设为Text，这会使页索引数据按钮使用文本而不是图片按钮。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PagingButtonLayoutType">
+            <summary>
+      指定分页导航按钮（数字和上页、下页、首页、尾页）布局方式，可以将这些元素包含在&lt;li&gt;
+      或&lt;span&gt;标签中以方便应用CSS样式，默认不包含在任何标签中。
+    </summary><value>
+      一个<see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonLayoutType"/>枚举。
+    </value>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CurrentPageButtonPosition">
+            <summary>
+      当前页数字按钮在所有数字分页按钮中的位置，可选值为：Beginning（最前）、End（最后）、Center（居中）和Fixed（默认固定）
+    </summary><value>
+      一个<see cref="T:Wuqi.Webdiyer.PagingButtonPosition"/>枚举。
+    </value>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.NavigationButtonsPosition">
+            <summary>
+      首页、上页、下页和尾页四个导航按钮在分页导航元素中的位置，可选值为：Left（全在左侧）、Right（全在右侧）、BothSides（默认值，分布于两侧）
+    </summary><value>
+      一个<see cref="T:Wuqi.Webdiyer.NavigationButtonPosition"/>枚举。
+    </value>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.NavigationButtonType">
+            <summary>
+      获取或设置第一页、上一页、下一页和最后一页按钮的类型，该值仅当PagingButtonType设为Image时才有效。
+    </summary><remarks>
+      当您将PagingButtonType设为Image但又不想让第一页、下一页、下一页和最后一页按钮使用图片，则可以将该值设为Text，这会使前面的四个按钮使用文本而不是图片按钮。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.UrlPagingTarget">
+            <summary>获取或设置Url分页时分页按钮或超链接指向的目标窗口或框架的名称。</summary><remark>
+      在Url分页时，如果您想在新的空白窗口或已知窗口或框架中打开分页后的页面，可以设置此属性值为目标窗口或框架的名称，如果未设置该属性，点击分页按钮后将在当前窗口或框架中打开新页面。
+    </remark>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.MoreButtonType">
+            <summary>
+      获取或设置“更多页”（...）按钮的类型，该值仅当PagingButtonType设为Image时才有效。
+    </summary><remarks>
+      当您将PagingButtonType设为Image但又不想让更多页（...）按钮使用图片时，可以将此值设为Text，这会使更多页按钮使用文本而不是图片按钮。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PagingButtonSpacing">
+            <summary>
+      获取或设置分页导航按钮之间的间距。
+    </summary><value>
+      一个 Unit 值，默认值为5px。
+    </value>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowFirstLast">
+            <summary>
+      获取或设置一个值，该值指示是否在页导航元素中显示第一页和最后一页按钮。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowPrevNext">
+            <summary>
+      获取或设置一个值，该值指示是否在页导航元素中显示上一页和下一页按钮。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowPageIndex">
+            <summary>
+      获取或设置一个值，该值指示是否在页导航元素中显示页索引数值按钮。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowMoreButtons">
+            <summary>
+      获取或设置一个值，该值指示是否在页导航元素中显示更多页按钮。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.FirstPageText">
+            <summary>
+      获取或设置为第一页按钮显示的文本。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PrevPageText">
+            <summary>
+      获取或设置为上一页按钮显示的文本。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.NextPageText">
+            <summary>
+      获取或设置为下一页按钮显示的文本。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.LastPageText">
+            <summary>
+      获取或设置为最后一页按钮显示的文本。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.NumericButtonCount">
+            <summary>
+      获取或设置在 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 控件的页导航元素中同时显示的数值按钮的数目。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowDisabledButtons">
+            <summary>
+      获取或设置一个值，该值指定是否显示已禁用的按钮。
+    </summary><remarks>
+      该值用来指定是否显示已禁用的分页导航按钮，当当前页为第一页时，第一页和上一页按钮将被禁用，当当前页为最后一页时，下一页和最后一页按钮将被禁用，被禁用的按钮没有链接，在按钮上点击也不会有任何作用。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ImagePath">
+            <summary>
+      获取或设置当使用图片按钮时，图片文件的路径。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ButtonImageExtension">
+            <summary>
+      获取或设置当使用图片按钮时，图片的类型，如gif或jpg，该值即图片文件的后缀名。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ButtonImageNameExtension">
+            <summary>
+      获取或设置自定义图片文件名的后缀字符串，以区分不同类型的按钮图片。
+    </summary><remarks>
+      <note>
+        该值不是文件后缀名，而是为区分不同的图片文件而在图片名中加入的字符串，如：
+        当前有两套按钮图片，其中一套中的“1”的图片名可为“1f.gif”，另一套中的“1”的图片名可起为“1n.gif”，其中的f和n即为ButtonImageNameExtension。
+      </note>
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CpiButtonImageNameExtension">
+            <summary>
+      获取或设置当前页索引按钮的图片名后缀。
+    </summary><remarks>
+      当 <see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonType"/> 设为 Image 时，该属性允许您设置当前页索引数值按钮使用的图片名后缀字符，因此可以使当前页索引按钮与其它页索引按钮使用不同的图片，若未设置该值，则默认值为<see cref="P:Wuqi.Webdiyer.AspNetPager.ButtonImageNameExtension"/>，即当前页索引按钮与其它页索引按钮使用相同的图片。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.DisabledButtonImageNameExtension">
+            <summary>
+      获取或设置被禁用的分页元素使用的图片文件名后缀字符串，以便被禁用和未禁用的按钮可以使用不同的图片。
+    </summary><remarks>
+      当 <see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonType"/> 设为 Image 时， 该值允许您设置已禁用（即没有链接，因而点击后无反应）的页导航按钮（包括第一页、上一页、下一页、最后一页四个按钮）的图片文件名后缀字符串，因此可以使已禁用的页导航按钮不同于正常的页导航按钮。若未设置该值，则默认值为<see cref="P:Wuqi.Webdiyer.AspNetPager.ButtonImageNameExtension"/>，即已禁用的页导航按钮与正常的页导航按钮使用相同的图片。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ButtonImageAlign">
+            <summary>
+      指定当使用图片按钮时，图片的对齐方式。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.UrlPaging">
+            <summary>
+      获取或设置是否启用url来传递分页信息。
+    </summary><remarks>
+      启用Url分页方式是将用户欲访问的页索引通过Url来传递，由于该分页方式不使用页面向自身回发来传递数据，
+      所以每次分页时所有的数据都恢复为初始值或需要重新获取。使用Url分页方式不支持动态改变分页控件的属性值，因为无法将新的属性值通过Url来传递给下一页。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.UrlPageIndexName">
+            <summary>
+      获取或设置当启用Url分页方式时，在url中表示要传递的页索引的参数的名称。
+    </summary><remarks>
+      该属性允许您自定义通过Url传递页索引时表示要传递的页索引的参数的名称，以避免与现有的参数名重复。
+      <p>该属性的默认值是“page”，即通过Url分页时，显示在浏览器地址栏中的Url类似于：</p>http://www.webdiyer.com/aspnetpager/samples/datagrid_url.aspx?page=2
+      <p>如将该值改为“pageindex”，则上面的Url将变为：</p><p>http://www.webdiyer.com/aspnetpager/samples/datagrid_url.aspx?pageindex=2 </p>
+      <note>当同一个页面上有两个分页控件为不同的数据实现分页时，必须为每个分页控件的UrlPageIndexName属性指定不同的值，否则一个分页控件分页将导致其它分页控件同时分页。</note>
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.UrlPageSizeName">
+            <summary>
+      获取或设置Url中指定每页显示记录数的参数的名称，或该值不为空或Url中该值对应的参数的值大于0，则PageSize属性将使用该参数的值做为每页显示的记录数。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ReverseUrlPageIndex">
+            <summary>
+      获取或设置当启用Url分页方式时，是否以反方向显示分页页索引参数，以利于优化搜索引擎搜索结果。
+    </summary><remarks>
+      该值设为true时，在Url分页时，Url中的当前页索引参数将与分页控件显示的当前页索引值反方向显示，如共有25页数据，分页控件的第1页将在Url显示为25页，分页控件的第25页将在Url中显示为第1页，分页控件中的第2页将在Url显示为24页，依次类推。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CurrentPageIndex">
+            <summary>
+      获取或设置当前显示页的索引。
+    </summary><remarks>
+      使用此属性来确定在 AspNetPager 控件中当前显示的页，当前显示的页的数字索引将默认以红色字体加粗显示，用户可以通过<see cref="P:Wuqi.Webdiyer.AspNetPager.CurrentPageButtonClass"/>或<see cref="P:Wuqi.Webdiyer.AspNetPager.CurrentPageButtonStyle"/> 属性来自定义当前页数字索引的显示样式。此属性还用于以编程的方式控制分页控件当前显示的页。
+      <note>不同于起始值为0的DataGrid控件的CurrentPageIndex和GridView控件的PageIndex属性，AspNetPager的CurrentPageIndex值是从1开始的。</note>
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.RecordCount">
+            <summary>
+      获取或设置需要分页的所有记录的总数。
+    </summary><remarks>
+      当页面第一次加载时，应以编程方式将有要分页的记录的总数赋予该属性，AspNetPager会将其保存的ViewState中并在页面回发时从ViewState中获取该值，因此避免了每次分页都要访问数据库而影响分页性能。AspNetPager根据要分页的所有数据的总项数和 <see cref="P:Wuqi.Webdiyer.AspNetPager.PageSize"/> 属性来计算显示所有数据需要的总页数，即 <see cref="P:Wuqi.Webdiyer.AspNetPager.PageCount"/>的值。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PagesRemain">
+            <summary>
+      获取当前页之后未显示的页的总数。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PageSize">
+            <summary>
+      获取或设置每页显示的项数。
+    </summary><remarks>
+      该值获取或设置数据呈现控件每次要显示数据表中的的数据的项数，AspNetPager根据该值和 <see cref="P:Wuqi.Webdiyer.AspNetPager.RecordCount"/> 来计算显示所有数据需要的总页数，即 <see cref="P:Wuqi.Webdiyer.AspNetPager.PageCount"/>的值。
+    </remarks><example>
+      以下示例将 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 设置为允许每页显示8条数据：
+      <code>
+        <![CDATA[
+  ...
+  <Webdiyer:AspNetPager id="pager" runat="server" PageSize=8 OnPageChanged="ChangePage"/>
+  ...
+ ]]>
+      </code>
+    </example>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.RecordsRemain">
+            <summary>
+      获取在当前页之后还未显示的剩余记录的项数。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.StartRecordIndex">
+            <summary>
+      当前页数据记录的起始索引。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.EndRecordIndex">
+            <summary>
+      当前页最后一条记录的索引。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PageCount">
+            <summary>
+      获取所有要分页的记录需要的总页数。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowPageIndexBox">
+            <summary>
+      获取或设置页索引框的显示方式，以便用户输入或从下拉框中选择需要跳转到的页索引。
+    </summary><value>
+      一个<see cref="P:Wuqi.Webdiyer.AspNetPager.ShowPageIndexBox"/>枚举。
+    </value>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PageIndexBoxType">
+            <summary>
+      或者或设置页索引框的显示类型，可以是允许用户手工输入的文本框和只能选择的下拉框。
+    </summary><value>
+      一个<see cref="P:Wuqi.Webdiyer.AspNetPager.PageIndexBoxType"/>枚举。
+    </value>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PageIndexBoxClass">
+            <summary>
+      获取或设置应用于页索引输入文本框或下拉框的CSS类名。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PageIndexBoxStyle">
+            <summary>
+      获取或设置页索引输入文本框或下拉框的CSS样式文本。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.TextBeforePageIndexBox">
+            <summary>
+      获取或设置页索引页索引输入文本框或下拉框前的文本字符串值。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.TextAfterPageIndexBox">
+            <summary>
+      获取或设置页索引页索引输入文本框或下拉框后的文本字符串值。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.SubmitButtonText">
+            <summary>
+      获取或设置提交按钮上的文本。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.SubmitButtonClass">
+            <summary>
+      获取或设置应用于提交按钮的CSS类名。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.SubmitButtonStyle">
+            <summary>
+      获取或设置应用于提交按钮的CSS样式。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.SubmitButtonImageUrl">
+            <summary>
+      获取或设置提交按钮的图片路径，若该属性值为空，则提交按钮显示为普通按钮，否则显示为图片按钮并使用该属性的值做为图片路径。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowBoxThreshold">
+            <summary>
+      获取或设置自动显示页索引输入文本框的最低起始页数。
+    </summary><remarks>
+      当 <see cref="P:Wuqi.Webdiyer.AspNetPager.ShowPageIndexBox"/> 设为Auto（默认）并且要分页的数据的总页数达到该值时会自动显示页索引输入文本框，默认值为30。该选项当 <see cref="P:Wuqi.Webdiyer.AspNetPager.ShowPageIndexBox"/> 设为Never或Always时没有任何作用。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.ShowCustomInfoSection">
+            <summary>
+      获取或设置显示用户自定义信息区的方式。
+    </summary><remarks>
+      该属性值设为Left或Right时会在分页导航元素左边或右边划出一个专门的区域来显示有关用户自定义信息，设为Never时不显示。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CustomInfoTextAlign">
+            <summary>
+      获取或设置用户自定义信息区文本的对齐方式。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CustomInfoSectionWidth">
+            <summary>
+      获取或设置用户自定义信息区的宽度。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CustomInfoClass">
+            <summary>
+      获取或设置应用于用户自定义信息区的级联样式表类名。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CustomInfoStyle">
+            <summary>
+      获取或设置应用于用户自定义信息区的CSS样式文本。
+    </summary><value>字符串值，要应用于用户自定义信息区的CSS样式文本。</value>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CustomInfoHTML">
+            <summary>
+      获取或设置在显示在用户自定义信息区的用户自定义HTML文本内容。
+    </summary><remarks>
+      可以用“%”+属性名+“%”来代替该属性的值，控件在运行时会将“%”+属性名+“%”替换为相应的属性的值，其中的“属性名”仅适用于下列属性：
+      <ul>
+        <li>RecordCount：记录总数</li>
+        <li>PageCount：总页数</li>
+        <li>CurrentPageIndex：当前页索引</li>
+        <li>StartRecordIndex：当前页起始记录的索引</li>
+        <li>EndRecordIndex：当前页最后一条记录的索引</li>
+        <li>PageSize：每页显示的记录项数</li>
+        <li>PagesRemain：当前页之后剩余的未显示的记录的页数</li>
+        <li>RecordsRemain：当前页之后剩余的未显示的记录总项数</li>
+      </ul>
+      属性名不区分大小写，所以“%RecordCount%”可以写为“%recordcount%”。
+    </remarks><example>
+      下面的代码片段显示如何设置AspNetPager的用户自定义信息：<br/>
+      <code>
+        <![CDATA[
+ <webdiyer:aspnetpager id="AspNetPager1" runat="server" horizontalalign="Center" 
+ onpagechanged="AspNetPager1_PageChanged" showcustominfosection="Left" width="100%" 
+ CustomInfoHTML="当前页：%CurrentPageIndex%&nbsp;总页数：%PageCount%&nbsp;显示第%StartRecordIndex%条到%EndRecordIndex%条记录">
+ </webdiyer:aspnetpager>
+ ]]>
+      </code>
+    </example>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CurrentPageButtonStyle">
+            <summary>
+      获取或设置AspNetPager分页控件当前页导航按钮的CSS样式文本。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CurrentPageButtonClass">
+            <summary>
+      获取或设置AspNetPager分页控件当前页导航按钮的级联样式表 (CSS) 类。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PagingButtonsClass">
+            <summary>
+      获取或设置AspNetPager分页控件导航按钮（数字页索引、上页、下页、首页和尾页）的级联样式表 (CSS) 类。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PagingButtonsStyle">
+            <summary>
+      获取或设置AspNetPager分页控件导航按钮（数字页索引、上页、下页、首页和尾页）的CSS样式文本。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.FirstLastButtonsClass">
+            <summary>
+      获取或设置AspNetPager分页控件首页和尾页导航按钮的级联样式表 (CSS) 类。
+    </summary><remarks>
+      若未设置该值，则使用 <see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonsClass"/> 中设置的属性值。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.FirstLastButtonsStyle">
+            <summary>
+      获取或设置AspNetPager分页控件首页和尾页导航按钮的CSS样式文本。
+    </summary><remarks>
+      若未设置该值，则使用 <see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonsStyle"/> 中设置的属性值。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PrevNextButtonsClass">
+            <summary>
+      获取或设置AspNetPager分页控件上页和下页导航按钮的级联样式表 (CSS) 类。
+    </summary><remarks>
+      若未设置该值，则使用 <see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonsClass"/> 中设置的属性值。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PrevNextButtonsStyle">
+            <summary>
+      获取或设置AspNetPager分页控件上页和下页导航按钮的CSS样式文本。
+    </summary><remarks>
+      若未设置该值，则使用 <see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonsStyle"/> 中设置的属性值。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.MoreButtonsClass">
+            <summary>
+      获取或设置AspNetPager分页控件更多页（...）导航按钮的级联样式表 (CSS) 类。
+    </summary><remarks>
+      若未设置该值，则使用 <see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonsClass"/> 中设置的属性值。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.MoreButtonsStyle">
+            <summary>
+      获取或设置AspNetPager分页控件更多页（...）导航按钮的CSS样式文本。
+    </summary><remarks>
+      若未设置该值，则使用 <see cref="P:Wuqi.Webdiyer.AspNetPager.PagingButtonsStyle"/> 中设置的属性值。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.CloneFrom">
+            <summary>
+      获取或设置要克隆属性值及事件处理程序的另一个 AspNetPager 的ID。
+    </summary><remarks>
+      当一个页面上同时有两个或更多 AspNetPager 分页控件为相同的数据控件实现分页时，可以只设置一个 AspNetPager 的相关属性及事件处理程序，其它 AspNetPager 控件可以将 CloneFrom 属性指向该控件，自动克隆该控件的属性及事件处理程序而无需重复设置属性及编写事件处理程序，
+      在Url分页模式下，如果有两个或更多 AspNetPager 同时处理相同的数据或为相同的数据控件实现分页，则应该只设置一个 AspNetPager 的相关属性及编写事件处理程序，其它 AspNetPager 控件通过指定 CloseFrom 属性从该控件自动复制相关属性及事件处理程序，否则因为Url分页模式是在页面第一次加载时引发分页事件，所以如果有多个分页控件为相同的数据分页，每个 AspNetPager 的分页事件都被引发，从而导致数据被多次获取及绑定。
+    </remarks><example>
+      下面的示例使用两个AspNetPager为同一个Repeater进行分页，只需要设置第一个 AspNetPager 的相关属性及编写事件处理程序，第二个 AspNetPager 分页控件将 CloseFrom 属性设置为第一个 AspNetPager 的ID，从而实现自动复制第一个 AspNetPager 的相关属性及事件处理程序的目的：
+      <code>
+        <![CDATA[
+<%@ Register Assembly="AspNetPager" Namespace="Wuqi.Webdiyer" TagPrefix="webdiyer" %>
+<%@Import NameSpace="System.Data"%>
+<%@Import NameSpace="System.Data.SqlClient"%>
+<script runat="server" Language="C#">
+void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            int totalOrders = (int)SqlHelper.ExecuteScalar(CommandType.StoredProcedure, "P_GetOrderNumber");
+            AspNetPager1.RecordCount = totalOrders;
+            bindData();
+        }
+    }
+
+ void bindData()
+    {
+        Repeater1.DataSource = SqlHelper.ExecuteReader(CommandType.StoredProcedure,"P_GetPagedOrders2005",
+            new SqlParameter("@startIndex", AspNetPager1.StartRecordIndex),
+            new SqlParameter("@pageSize", AspNetPager1.PageSize));
+        Repeater1.DataBind();
+    }
+
+ void AspNetPager1_PageChanged(object src, EventArgs e)
+    {
+        bindData();
+    }
+</script>
+<HTML><HEAD>
+<TITLE> AspNetPager Samples </TITLE>
+<META NAME="Author" CONTENT="Webdiyer (www.webdiyer.com)">
+</HEAD>
+
+<BODY>
+<form runat="server">
+  <webdiyer:AspNetPager ID="AspNetPager1" runat="server" Width="100%" HorizontalAlign="right" PageSize="8" OnPageChanged="AspNetPager1_PageChanged">
+        </webdiyer:AspNetPager>
+        <asp:Repeater ID="Repeater1" runat="server">
+        <HeaderTemplate>
+        <table width="100%" border="1" cellspacing="0" cellpadding="4" style="border-collapse:collapse">
+        <tr style="backGround-color:#CCCCFF"><th style="width:15%"><asp:Literal ID="Literal1" runat="server" Text="<%$Resources:LocalizedText,orderid%>" /></th><th style="width:15%"><asp:Literal ID="Literal3" runat="server" Text="<%$Resources:LocalizedText,orderdate%>" /></th><th style="width:30%"><asp:Literal ID="Literal5" runat="server" Text="<%$Resources:LocalizedText,companyname%>" /></th><th style="width:20%"><asp:Literal ID="Literal2" runat="server" Text="<%$Resources:LocalizedText,customerid%>" /></th><th style="width:20%"><asp:Literal ID="Literal4" runat="server" Text="<%$Resources:LocalizedText,employeename%>" /></th></tr>
+        </HeaderTemplate>
+        <ItemTemplate>
+        <tr style="background-color:#FAF3DC">
+        <td><%#DataBinder.Eval(Container.DataItem,"orderid")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"orderdate","{0:d}")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem, "companyname")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"customerid")%></td>
+        <td><%#DataBinder.Eval(Container.DataItem,"employeename")%></td>
+        </tr>
+        </ItemTemplate>
+		<FooterTemplate>
+        </table>
+        </FooterTemplate>
+        </asp:Repeater>
+        <webdiyer:AspNetPager ID="AspNetPager2" runat="server" CloneFrom="AspNetPager1">
+        </webdiyer:AspNetPager>
+		</form>
+</BODY>
+</HTML>
+        ]]>
+      </code>
+    </example>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.EnableTheming">
+            <summary>
+      获取或设置一个值，该值指定是否为控件应用主题。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.SkinID">
+            <summary>
+      获取或设置要应用于控件的皮肤的ID。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.EnableUrlRewriting">
+            <summary>
+      获取或设置一个值，该值指定是否启用URL重写。
+    </summary><remarks>
+      设置该属性值为true时，UrlPaging属性值将自动变为true，即自动启用Url分页。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.UrlRewritePattern">
+            <summary>
+      获取或设置分页URL重写格式。
+    </summary><remarks>
+      该属性仅当 UrlPaging 或 EnableUrlRewriting 的值为true时才有效。要重写的Url路径可以是相对于当前的Url路径，如：../pagelist_{0}.aspx ，也可以是绝对路径，如：http://www.webdiyer.com/articles/{0}.aspx ，用“{0}”占位符来表示AspNetPager分页控件的当页页索引值，用“%参数名%”表示Url中相应的参数的值。如果不设置该值，默认值为当前页面路径加下划线后跟页索引，
+      如当前Url是 http://www.webdiyer.com/articlelist.aspx ，不设置 UrlRewritePattern 时，第一页的默认路径就是 http://www.webdiyer.com/articlelist_1.aspx ，第二页就是 http://www.webdiyer.com/articlelist_2.asp ，依次类推。以下举例说明如何设置重写格式：
+      <p>
+        <![CDATA[1、原始Url：http://www.webdiyer.com/articlelist.aspx?type=aspnet&page=2]]>（其中参数page=2为AspNetPager传递的页索引参数，这个参数名可以通过<see cref="P:Wuqi.Webdiyer.AspNetPager.UrlPageIndexName"/>属性设置，默认值为“page”）<br/>
+        重写为：http://www.webdiyer.com/articlelist/aspnet/2.aspx ，则应设置：UrlRewritePattern="./articlelist/%type%/{0}.aspx";
+      </p>
+      <p>
+        <![CDATA[2、原始Url：http://www.webdiyer.com/articlelist.aspx?type=dotnet&subtype=aspnet&page=3]]> （其中参数page=3为AspNetPager传递的页索引参数，这个参数名可以通过<see cref="P:Wuqi.Webdiyer.AspNetPager.UrlPageIndexName"/>属性设置，默认值为“page”）<br/>
+        重写为：http://www.webdiyer.com/articlelist/dotnet/aspnet/page_3.aspx ，则应设置：UrlRewritePattern="./articlelist/%type%/%subtype%/page_{0}.aspx";
+      </p>
+    </remarks><example>
+      下面的示例中演示如何设置 UrlRewritePattern 属性：
+      <code>
+        <![CDATA[
+<webdiyer:aspnetpager id="AspNetPager1" runat="server" horizontalalign="Center" width="100%"
+UrlPaging="true" EnableUrlRewriting="true" UrlRewritePattern="./listpage_{0}.aspx" 
+OnPageChanged="AspNetPager1_PageChanged"></webdiyer:aspnetpager>
+      ]]>
+      </code>
+    </example>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.FirstPageUrlRewritePattern">
+            <summary>
+      获取或设置首页的URL重写格式，用于首页Url的SEO优化。
+    </summary><remarks>
+      该属性仅当 UrlPaging 或 EnableUrlRewriting 的值为true时才有效。要重写的Url路径可以是相对于当前的Url路径，如：default.aspx ，也可以是绝对路径，如：http://www.webdiyer.com/articles/default.aspx ，用“{0}”占位符来表示AspNetPager分页控件的当页页索引值，用“%参数名%”表示Url中相应的参数的值。如果不设置该值，则使用UrlRewritePattern属性值。
+    </remarks><example>
+      下面的示例中演示如何设置 FirstPageUrlRewritePattern 属性：
+      <code>
+        <![CDATA[
+<webdiyer:aspnetpager id="AspNetPager1" runat="server" horizontalalign="Center" width="100%"
+UrlPaging="true" EnableUrlRewriting="true" UrlRewritePattern="./listpage_{0}.aspx"  FirstPageUrlRewritePattern="default.aspx"
+OnPageChanged="AspNetPager1_PageChanged"></webdiyer:aspnetpager>
+      ]]>
+      </code>
+    </example> added on 2012-11-11
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.AlwaysShow">
+            <summary>
+      获取或设置一个值，该值指定是否总是显示AspNetPager分页按件，即使要分页的数据只有一页。
+    </summary><remarks>
+      默认情况下，当要分页的数据只有一页时，AspNetPager默认会自动危险期而不在页面上显示任何可见内容，将此属性值设为true时，即使总页数只有一页，AspNetPager也将显示分页导航元素。
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.AlwaysShowFirstLastPageNumber">
+            <summary>
+      获取或设置一个值，该值指定是否总是显示第一页和最后一页数字页索引按钮。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.Wrap">
+            <summary>
+      获取或设置一个值，该值批示是否允许控件中的内容换行。
+    </summary><remarks>
+      <note>
+        AspNetPager 控件重写该属性，不允许内容换行。
+      </note>
+    </remarks>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.PageIndexOutOfRangeErrorMessage">
+            <summary>
+      获取或设置当用户输入的页索引超出范围（大于最大页索引或小于最小页索引）时在客户端显示的错误信息。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.InvalidPageIndexErrorMessage">
+            <summary>
+      获取或设置当用户输入无效的页索引（负值或非数字）时在客户端显示的错误信息。
+    </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.AspNetPager.LayoutType">
+            <summary>
+      分页控件自定义信息区和分页导航区使用的布局方式。
+    </summary><value>
+      一个<see cref="P:Wuqi.Webdiyer.AspNetPager.LayoutType"/>枚举。
+    </value>
+        </member>
+        <member name="T:Wuqi.Webdiyer.PageChangingEventHandler">
+            <summary>
+      表示处理 <see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanging"/> 事件的方法。
+    </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.PageChangingEventArgs">
+            <summary>
+      为 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 控件的 <see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanging"/> 事件提供数据。无法继承此类。
+    </summary><remarks>
+      <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 分页控件会在下列情况下引发 <see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanging"/>事件：<ol>
+        <li>使用PostBack方式分页，分页控件的页导航元素之一被单击或用户输入页索引值然后点击跳转按钮或按回车键时；</li>
+        <li>使用Url方式分页，页面第一次加载时（没有产生回发时）。</li>
+      </ol>
+      <p>
+        PageChanging事件发生在AspNetPager控件处理分页操作之前，一个 PageChangingEventArgs 对象被传递给该事件的处理程序，您可以从该对象传递的数据中获取用户要跳转到的新的页索引以及决定是否取消分页事件，
+        要取消分页事件，将 PageChangingEventArgs 的 Cancel 属性设置为true即可（该方法仅适用于PostBack方式分页时，Url方式分页时因为无法获取分页前的页面状态及上一页的页索引，所以不理会该属性的值而继续引发 <see cref="E:Wuqi.Webdiyer.AspNetPager.PageChanged"/> 事件来实现分页操作）。
+      </p>
+      <p>有关 PageChangingEventArgs 实例的初始属性值列表，请参阅 PageChangingEventArgs 构造函数。</p>
+    </remarks>
+        </member>
+        <member name="M:Wuqi.Webdiyer.PageChangingEventArgs.#ctor(System.Int32)">
+            <summary>
+      使用新页面索引初始化 PageChangingEventArgs 类的新实例。
+    </summary><param name="newPageIndex">
+      要跳转到的新页面的页索引。
+    </param>
+        </member>
+        <member name="P:Wuqi.Webdiyer.PageChangingEventArgs.NewPageIndex">
+            <summary>
+      获取用户在 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 控件的页选择元素中选定的或在页索引文本框中手工输入的页的索引。
+    </summary><value>
+      用户在 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 控件的页选择元素中选定的或在页索引文本框中输入的页的索引。
+    </value><remarks>
+      使用 NewPageIndex 属性确定用户在 <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 控件的页选择元素中选定的或在页索引文本框中输入的页的索引。
+      该值常用于设置要显示选定页的 AspNetPager 控件的 <see cref="P:Wuqi.Webdiyer.AspNetPager.CurrentPageIndex"/> 属性。
+    </remarks>
+        </member>
+        <member name="T:Wuqi.Webdiyer.AspNetPagerIDConverter">
+            <summary>
+            AspNetPager type converter used for the design time support
+            </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.CustomInfoForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.CustomInfoForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.CustomInfoForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.ShowPageIndexBox">
+            <summary>
+      指定页索引框的显示方式，以便用户输入或从下拉框中选择需要跳转到的页索引。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.ShowPageIndexBox.Never">
+            <summary>
+      从不显示页索引输入文本框。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.ShowPageIndexBox.Auto">
+            <summary>
+      自动，选择此项后可以用 <see cref="P:Wuqi.Webdiyer.AspNetPager.ShowBoxThreshold"/> 可控制当总页数达到多少时自动显示页索引输入文本框。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.ShowPageIndexBox.Always">
+            <summary>
+      总是显示页索引输入文本框。
+    </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.PageIndexBoxType">
+            <summary>
+      指定页索引框的显示类型，可以是允许用户手工输入的文本框和只能选择的下拉框。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PageIndexBoxType.TextBox">
+            <summary>
+      使用文本框由用户手工输入页索引。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PageIndexBoxType.DropDownList">
+            <summary>
+      使用下拉框，列出所有页索引由用户选择。
+    </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.ShowCustomInfoSection">
+            <summary>
+      指定当前页索引和总页数信息的显示方式。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.ShowCustomInfoSection.Never">
+            <summary>
+      不显示。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.ShowCustomInfoSection.Left">
+            <summary>
+      显示在页导航元素之前。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.ShowCustomInfoSection.Right">
+            <summary>
+      显示在页导航元素之后。
+    </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.PagingButtonType">
+            <summary>
+      指定页导航按钮的类型。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonType.Text">
+            <summary>
+      使用文字按钮。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonType.Image">
+            <summary>
+      使用图片按钮。
+    </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.LayoutType">
+            <summary>
+      分页控件自定义信息区和分页导航区使用的布局方式。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.LayoutType.Table">
+            <summary>
+      使用表格（Table）布局方式。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.LayoutType.Div">
+            <summary>
+      使用Div布局方式。
+    </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.PagingButtonPosition">
+            <summary>
+      指定当前页数字索引按钮在所有数字页索引按钮中的位置。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonPosition.Beginning">
+            <summary>
+      当前页数字索引总是显示在所有数字页索引的最前面。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonPosition.End">
+            <summary>
+      当前页数字索引总是显示在所有数字页索引的最后面。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonPosition.Center">
+            <summary>
+      当前页数字索引总是显示在所有数字页索引的中间。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonPosition.Fixed">
+            <summary>
+      默认值，当前页索引位置固定不变。
+    </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.PagingButtonLayoutType">
+            <summary>
+      指定分页元素（数字页索引、上页、下页、首页和尾页）的布局方式。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonLayoutType.UnorderedList">
+            <summary>
+      将每个分页元素包含在&lt;li&gt;与&lt;/li&gt;之间。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonLayoutType.Span">
+            <summary>
+      将每个分页元素包含在&lt;span&gt;与&lt;/span&gt;之间。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PagingButtonLayoutType.None">
+            <summary>
+      不设置，使用默认布局。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.NavigationButtonPosition.Left">
+            <summary>
+      首页、上页、下页和尾页四个导航按钮全部分布于分页导航元素左侧。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.NavigationButtonPosition.Right">
+            <summary>
+      首页、上页、下页和尾页四个导航按钮全部分布于分页导航元素右侧。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.NavigationButtonPosition.BothSides">
+            <summary>
+      默认值，首页、上页、下页和尾页四个导航按钮分布于分页导航元素两侧。
+    </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.NavTextForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.NavTextForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.NavTextForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.PageIndexBoxForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.PageIndexBoxForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.PageIndexBoxForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Wuqi.Webdiyer.PagerDesigner">
+            <summary>
+      <see cref="T:Wuqi.Webdiyer.AspNetPager"/> 服务器控件设计器。
+    </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.PagerDesigner.GetEditableDesignerRegionContent(System.Web.UI.Design.EditableDesignerRegion)">
+            <summary>
+      重写GetEditableDesignerRegionContent方法
+    </summary><param name="region">
+    </param><returns>
+    </returns>
+        </member>
+        <member name="M:Wuqi.Webdiyer.PagerDesigner.GetDesignTimeHtml">
+            <summary>
+      获取用于在设计时表示关联控件的 HTML。
+    </summary><returns>用于在设计时表示控件的 HTML。</returns>
+        </member>
+        <member name="M:Wuqi.Webdiyer.PagerDesigner.GetErrorDesignTimeHtml(System.Exception)">
+            <summary>
+      获取在呈现控件时遇到错误后在设计时为指定的异常显示的 HTML。
+    </summary><param name="e">要为其显示错误信息的异常。</param><returns>设计时为指定的异常显示的 HTML。</returns>
+        </member>
+        <member name="T:Wuqi.Webdiyer.AspNetPagerActionList">
+            <summary>
+            Designer Action List
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.AspNetPagerActionList.#ctor(System.ComponentModel.IComponent)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="component"></param>
+        </member>
+        <member name="T:Wuqi.Webdiyer.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Wuqi.Webdiyer.Properties.Resources.aspnetpager">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.SPHelpForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.SPHelpForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.SPHelpForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.SPVarRegForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.SPVarRegForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.SPVarRegForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Wuqi.Webdiyer.StoredProcForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Wuqi.Webdiyer.StoredProcForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Wuqi.Webdiyer.StoredProcForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+    </members>
+</doc>

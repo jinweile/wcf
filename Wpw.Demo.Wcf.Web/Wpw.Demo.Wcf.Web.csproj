@@ -92,6 +92,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\cat-client.net\Cat.Net.csproj">
+      <Project>{7b5f7994-f1d1-494d-85b9-935a478591ad}</Project>
+      <Name>Cat.Net</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FrameWork\FrameWork.csproj">
       <Project>{37010614-A710-4B87-BA74-0487B8E3ED0A}</Project>
       <Name>FrameWork</Name>
@@ -108,6 +112,13 @@
   <ItemGroup>
     <Content Include="clientconst.config" />
     <Content Include="clientcontract.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="db%28监控中心使用%29\soa治理说明.pdf" />
+    <Content Include="db%28监控中心使用%29\WcfStatistics.pdm" />
+    <Content Include="db%28监控中心使用%29\wcf中间件使用说明.docx" />
+    <Content Include="db%28监控中心使用%29\WCF中间件设计说明书.doc" />
+    <Content Include="db%28监控中心使用%29\网票网wcf.pptx" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
