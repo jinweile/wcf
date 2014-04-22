@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph DataVirtualized="True" Layout="Sugiyama" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="(@1)" Category="CodeSchema_Assembly" Bounds="0,165,192.54,25" CodeSchemaProperty_StrongName="WcfStatisticsService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(462c5fa0-ac3c-4ef7-a7cd-01a17ce2cd31.OutputPath)" Group="Collapsed" Label="WcfStatisticsService.exe" />
+    <Node Id="@11" Category="CodeSchema_Assembly" Bounds="510.543333333333,55,192.583333333333,25" CodeSchemaProperty_StrongName="Eltc.Base.FrameWork, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(37010614-a710-4b87-ba74-0487b8e3ed0a.OutputPath)" Group="Collapsed" Label="Eltc.Base.FrameWork.dll" />
+    <Node Id="@13" Category="CodeSchema_Assembly" Bounds="-1.13686837721616E-13,110,207.67,25" CodeSchemaProperty_StrongName="WPW.Demo.Wcf.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(8b385afb-5690-41d5-b275-db254210989d.OutputPath)" Group="Collapsed" Label="WPW.Demo.Wcf.Model.dll" />
+    <Node Id="@15" Category="CodeSchema_Assembly" Bounds="844.655,110,186.36,25" CodeSchemaProperty_StrongName="WcfStatistics.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(d3dd1e33-76c0-4e03-9272-be60bf5aaa01.OutputPath)" Group="Collapsed" Label="WcfStatistics.Model.dll" />
+    <Node Id="@17" Category="CodeSchema_Assembly" Bounds="733.291666666667,55,173.086666666667,25" CodeSchemaProperty_StrongName="WcfStatistics.Dao, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(eab20ccf-d973-497a-96d9-a3d198f2ab27.OutputPath)" Group="Collapsed" Label="WcfStatistics.Dao.dll" />
+    <Node Id="@19" Category="CodeSchema_Assembly" Bounds="51.1083333333332,1.13686837721616E-13,193.453333333333,25" CodeSchemaProperty_StrongName="WPW.Demo.Wcf.Imp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(2e1654ce-2001-46dc-a17d-86827a322b88.OutputPath)" Group="Collapsed" Label="WPW.Demo.Wcf.Imp.dll" />
+    <Node Id="@21" Category="CodeSchema_Assembly" Bounds="385.265,55,95.14,25" CodeSchemaProperty_StrongName="Cat, Version=0.1.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(7b5f7994-f1d1-494d-85b9-935a478591ad.OutputPath)" Group="Collapsed" Label="Cat.dll" />
+    <Node Id="@3" Category="CodeSchema_Assembly" Bounds="500.756666666667,0,212.156666666667,25" CodeSchemaProperty_StrongName="WPW.Demo.Wcf.Server, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(02cdab16-f01a-4e70-a0f6-e08b9380e245.OutputPath)" Group="Collapsed" Label="WPW.Demo.Wcf.Server.exe" />
+    <Node Id="@5" Category="CodeSchema_Assembly" Bounds="830.018333333333,0,215.633333333333,25" CodeSchemaProperty_StrongName="WcfStatisticsServiceTest, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(b6c58ecb-1d46-48ca-b665-5b0292e79150.OutputPath)" Group="Collapsed" Label="WcfStatisticsServiceTest.exe" />
+    <Node Id="@7" Category="CodeSchema_Assembly" Bounds="275.216666666667,1.13686837721616E-13,195.236666666667,25" CodeSchemaProperty_StrongName="Wpw.Demo.Wcf.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(a99ebb5b-bbcd-4719-9d16-cfc47f6f78c8.OutputPath)" Group="Collapsed" Label="Wpw.Demo.Wcf.Web.dll" />
+    <Node Id="@9" Category="CodeSchema_Assembly" Bounds="134.491666666667,55.0000000000001,220.686666666667,25" CodeSchemaProperty_StrongName="WPW.Demo.Wcf.Interface, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" DelayedChildNodesState="NotFetched" DelayedCrossGroupLinksState="Fetched" FilePath="$(dd150e2a-8ee0-4098-98da-ca533dfc64a4.OutputPath)" Group="Collapsed" Label="WPW.Demo.Wcf.Interface.dll" />
+  </Nodes>
+  <Links>
+    <Link Source="@17" Target="@15" Category="References" Bounds="846.653198242188,80,56.2061767578125,26.1978149414063" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="162">
+      <Category Ref="CodeSchema_ReturnTypeLink" />
+    </Link>
+    <Link Source="@19" Target="@11" Category="InheritsFrom" Bounds="242.726989746094,23.8704986572266,260.660064697266,31.2337760925293" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="6">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@19" Target="@13" Category="References" Bounds="103.834999084473,25,34.0000076293945,76" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="6">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@19" Target="@21" Category="CodeSchema_Calls" Bounds="212.607727050781,25,164.092651367188,31.6670036315918" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="11" />
+    <Link Source="@19" Target="@9" Category="Implements" Bounds="169.880447387695,25,45.0800476074219,25.5608520507813" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@3" Target="@11" Category="CodeSchema_Calls" Bounds="606.835021972656,25,0,21" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="11" />
+    <Link Source="@3" Target="@21" Category="CodeSchema_Calls" Bounds="480.961944580078,25,86.3276062011719,27.2874565124512" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+    <Link Source="@5" Target="@11" Category="References" Bounds="690.940551757813,25,171.667175292969,28.5247573852539" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="29">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@5" Target="@15" Category="References" Bounds="937.835021972656,25,0,76" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="33">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@5" Target="@17" Category="References" Bounds="854.810607910156,25,56.2062377929688,26.1978149414063" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="15">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@7" Target="@11" Category="CodeSchema_Calls" Bounds="426.016815185547,25,118.875091552734,27.940731048584" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="10" />
+    <Link Source="@7" Target="@21" Category="CodeSchema_Calls" Bounds="386.471374511719,25,26.0928649902344,23.9184799194336" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="19" />
+    <Link Source="@7" Target="@9" Category="References" Bounds="282.194854736328,25,61.5492248535156,26.4469299316406" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="2">
+      <Category Ref="CodeSchema_Calls" />
+    </Link>
+    <Link Source="@9" Target="@13" Category="References" Bounds="144.26513671875,80,68.5244140625,26.729377746582" IsSourceVirtualized="True" IsTargetVirtualized="True" Weight="1" />
+  </Links>
+  <Categories>
+    <Category Id="CodeSchema_Assembly" Label="程序集" BasedOn="File" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="CodeSchema_Assembly" NavigationActionLabel="程序集" />
+    <Category Id="CodeSchema_Calls" Label="调用" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="调用者" OutgoingActionLabel="调用" />
+    <Category Id="CodeSchema_ReturnTypeLink" Label="返回" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="返回类型" OutgoingActionLabel="返回类型" />
+    <Category Id="File" Label="文件" CanBeDataDriven="True" DefaultAction="Microsoft.Contains" Icon="File" NavigationActionLabel="文件" />
+    <Category Id="Implements" Label="实现" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="实现者" OutgoingActionLabel="实现" />
+    <Category Id="InheritsFrom" Label="继承自" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="继承者" OutgoingActionLabel="继承自" />
+    <Category Id="References" Label="引用" CanBeDataDriven="True" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="引用者" OutgoingActionLabel="引用" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CodeSchemaProperty_StrongName" Label="StrongName" Description="StrongName" DataType="System.String" />
+    <Property Id="DataVirtualized" Label="已虚拟化数据" Description="如果为 true，则图中可以包含表示虚拟化节点/链接(即，不在图中实际创建)的数据的节点和链接。" DataType="System.Boolean" />
+    <Property Id="DefaultAction" Label="DefaultAction" Description="DefaultAction" DataType="System.String" />
+    <Property Id="DelayedChildNodesState" Label="延迟的子节点状态" Description="如果未指定延迟的子节点状态，则为 Unspecified。如果尚未将组包含的子节点提取到关系图中，则为 NotFetched。如果已提取组内的所有延迟的子节点，则为 Fetched。" DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
+    <Property Id="DelayedCrossGroupLinksState" Label="延迟的跨组链接状态" Description="如果未指定延迟的跨组链接状态，则为 Unspecified。如果尚未将此节点上延迟的跨组链接提取到关系图中，则为 NotFetched。如果已提取所有延迟的跨组链接，则为 Fetched。" DataType="Microsoft.VisualStudio.GraphModel.DelayedDataState" />
+    <Property Id="Expression" DataType="System.String" />
+    <Property Id="FilePath" Label="文件路径" Description="文件路径" DataType="System.String" />
+    <Property Id="Group" Label="组" Description="将节点显示为组" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="GroupLabel" DataType="System.String" />
+    <Property Id="Icon" Label="图标" Description="图标" DataType="System.String" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsEnabled" DataType="System.Boolean" />
+    <Property Id="IsSourceVirtualized" Label="已虚拟化链接源" Description="如果为 true，则链接源端包含虚拟化节点/链接(即，不在图中实际创建)的数据。" DataType="System.Boolean" />
+    <Property Id="IsTargetVirtualized" Label="已虚拟化链接目标" Description="如果为 true，则链接目标端包含虚拟化节点/链接(即，不在图中实际创建)的数据。" DataType="System.Boolean" />
+    <Property Id="Label" Label="标签" Description="可批注对象的可显示标签" DataType="System.String" />
+    <Property Id="Layout" DataType="System.String" />
+    <Property Id="NavigationActionLabel" Label="NavigationActionLabel" Description="NavigationActionLabel" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="TargetType" DataType="System.Type" />
+    <Property Id="Value" DataType="System.String" />
+    <Property Id="ValueLabel" DataType="System.String" />
+    <Property Id="Visibility" Label="Visibility" Description="Defines whether a node in the graph is visible or not" DataType="System.Windows.Visibility" />
+    <Property Id="Weight" Label="粗细" Description="粗细" DataType="System.Double" />
+  </Properties>
+  <QualifiedNames>
+    <Name Id="Assembly" Label="程序集" ValueType="Uri" />
+  </QualifiedNames>
+  <IdentifierAliases>
+    <Alias n="1" Uri="Assembly=$(462c5fa0-ac3c-4ef7-a7cd-01a17ce2cd31.OutputPathUri)" />
+    <Alias n="2" Uri="Assembly=$(02cdab16-f01a-4e70-a0f6-e08b9380e245.OutputPathUri)" />
+    <Alias n="3" Id="(@2)" />
+    <Alias n="4" Uri="Assembly=$(b6c58ecb-1d46-48ca-b665-5b0292e79150.OutputPathUri)" />
+    <Alias n="5" Id="(@4)" />
+    <Alias n="6" Uri="Assembly=$(a99ebb5b-bbcd-4719-9d16-cfc47f6f78c8.OutputPathUri)" />
+    <Alias n="7" Id="(@6)" />
+    <Alias n="8" Uri="Assembly=$(dd150e2a-8ee0-4098-98da-ca533dfc64a4.OutputPathUri)" />
+    <Alias n="9" Id="(@8)" />
+    <Alias n="10" Uri="Assembly=$(37010614-a710-4b87-ba74-0487b8e3ed0a.OutputPathUri)" />
+    <Alias n="11" Id="(@10)" />
+    <Alias n="12" Uri="Assembly=$(8b385afb-5690-41d5-b275-db254210989d.OutputPathUri)" />
+    <Alias n="13" Id="(@12)" />
+    <Alias n="14" Uri="Assembly=$(d3dd1e33-76c0-4e03-9272-be60bf5aaa01.OutputPathUri)" />
+    <Alias n="15" Id="(@14)" />
+    <Alias n="16" Uri="Assembly=$(eab20ccf-d973-497a-96d9-a3d198f2ab27.OutputPathUri)" />
+    <Alias n="17" Id="(@16)" />
+    <Alias n="18" Uri="Assembly=$(2e1654ce-2001-46dc-a17d-86827a322b88.OutputPathUri)" />
+    <Alias n="19" Id="(@18)" />
+    <Alias n="20" Uri="Assembly=$(7b5f7994-f1d1-494d-85b9-935a478591ad.OutputPathUri)" />
+    <Alias n="21" Id="(@20)" />
+  </IdentifierAliases>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="结果" ValueLabel="True">
+      <Condition Expression="HasCategory('QueryResult')" />
+      <Setter Property="Background" Value="#FFBCFFBE" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="程序集" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Assembly')" />
+      <Setter Property="Background" Value="#FF094167" />
+      <Setter Property="Stroke" Value="#FF094167" />
+      <Setter Property="Icon" Value="CodeSchema_Assembly" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="命名空间" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Namespace')" />
+      <Setter Property="Background" Value="#FF0E619A" />
+      <Setter Property="Stroke" Value="#FF0E619A" />
+      <Setter Property="Icon" Value="CodeSchema_Namespace" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="接口" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Interface')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Interface" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="结构" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Struct')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Struct" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="枚举" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Enum')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Enum" />
+      <Setter Property="LayoutSettings" Value="List" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="委托" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Delegate')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Delegate" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="类" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Type')" />
+      <Setter Property="Background" Value="#FF1382CE" />
+      <Setter Property="Stroke" Value="#FF1382CE" />
+      <Setter Property="Icon" Value="CodeSchema_Class" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="属性" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Property')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Property" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="方法" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Method') Or HasCategory('CodeSchema_CallStackUnresolvedMethod')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Method" />
+      <Setter Property="LayoutSettings" Value="List" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="事件" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Event')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Event" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="字段" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('CodeSchema_Field')" />
+      <Setter Property="Background" Value="#FFE0E0E0" />
+      <Setter Property="Stroke" Value="#FFE0E0E0" />
+      <Setter Property="Icon" Value="CodeSchema_Field" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Out Parameter" ValueLabel="True">
+      <Condition Expression="CodeSchemaProperty_IsOut = 'True'" />
+      <Setter Property="Icon" Value="CodeSchema_OutParameter" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Parameter" ValueLabel="True">
+      <Condition Expression="HasCategory('CodeSchema_Parameter')" />
+      <Setter Property="Icon" Value="CodeSchema_Parameter" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Local Variable" ValueLabel="True">
+      <Condition Expression="HasCategory('CodeSchema_LocalExpression')" />
+      <Setter Property="Icon" Value="CodeSchema_LocalExpression" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="外部" ValueLabel="具有类别">
+      <Condition Expression="HasCategory('Externals')" />
+      <Setter Property="Background" Value="#FF424242" />
+      <Setter Property="Stroke" Value="#FF424242" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Inherits From" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('InheritsFrom') And Target.HasCategory('CodeSchema_Class')" />
+      <Setter Property="TargetDecorator" Value="OpenArrow" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Implements" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="HasCategory('Implements') And Target.HasCategory('CodeSchema_Interface')" />
+      <Setter Property="TargetDecorator" Value="OpenArrow" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Field Read" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="Target.HasCategory('CodeSchema_Field') And HasCategory('CodeSchema_FieldRead')" />
+      <Setter Property="StrokeDashArray" Value="2 2" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Comment Link" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="Source.HasCategory('Comment')" />
+      <Setter Property="Stroke" Value="#FFE5C365" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Cursor Location Changed" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="IsCursorLocation" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Disabled Breakpoint Location Changed" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="DisabledBreakpointCount" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Enabled Breakpoint Location Changed" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="EnabledBreakpointCount" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Instruction Pointer Location Changed" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="IsInstructionPointerLocation" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+    <Style TargetType="Node" GroupLabel="Current Callstack Changed" ValueLabel="True" Visibility="Hidden">
+      <Condition Expression="IsCurrentCallstackFrame" />
+      <Setter Property="IndicatorWest" Value="WestIndicator" />
+    </Style>
+  </Styles>
+  <Paths>
+    <Path Id="02cdab16-f01a-4e70-a0f6-e08b9380e245.OutputPath" Value="D:\TeamCode\etaoshi\wcf\WPW.Demo.Wcf\WPW.Demo.Wcf.Server\bin\Debug\WPW.Demo.Wcf.Server.exe" />
+    <Path Id="02cdab16-f01a-4e70-a0f6-e08b9380e245.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/WPW.Demo.Wcf/WPW.Demo.Wcf.Server/bin/Debug/WPW.Demo.Wcf.Server.exe" />
+    <Path Id="2e1654ce-2001-46dc-a17d-86827a322b88.OutputPath" Value="D:\TeamCode\etaoshi\wcf\WPW.Demo.Wcf\WPW.Demo.Wcf.Imp\bin\Debug\WPW.Demo.Wcf.Imp.dll" />
+    <Path Id="2e1654ce-2001-46dc-a17d-86827a322b88.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/WPW.Demo.Wcf/WPW.Demo.Wcf.Imp/bin/Debug/WPW.Demo.Wcf.Imp.dll" />
+    <Path Id="37010614-a710-4b87-ba74-0487b8e3ed0a.OutputPath" Value="D:\TeamCode\etaoshi\wcf\WPW.Demo.Wcf\FrameWork\bin\Debug\Eltc.Base.FrameWork.dll" />
+    <Path Id="37010614-a710-4b87-ba74-0487b8e3ed0a.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/WPW.Demo.Wcf/FrameWork/bin/Debug/Eltc.Base.FrameWork.dll" />
+    <Path Id="462c5fa0-ac3c-4ef7-a7cd-01a17ce2cd31.OutputPath" Value="D:\TeamCode\etaoshi\wcf\wcf.monitor\WcfStatisticsService\bin\Debug\WcfStatisticsService.exe" />
+    <Path Id="462c5fa0-ac3c-4ef7-a7cd-01a17ce2cd31.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/wcf.monitor/WcfStatisticsService/bin/Debug/WcfStatisticsService.exe" />
+    <Path Id="7b5f7994-f1d1-494d-85b9-935a478591ad.OutputPath" Value="D:\TeamCode\etaoshi\cat-client.net\bin\Debug\Cat.dll" />
+    <Path Id="7b5f7994-f1d1-494d-85b9-935a478591ad.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/cat-client.net/bin/Debug/Cat.dll" />
+    <Path Id="8b385afb-5690-41d5-b275-db254210989d.OutputPath" Value="D:\TeamCode\etaoshi\wcf\WPW.Demo.Wcf\WPW.Demo.Wcf.Model\bin\Debug\WPW.Demo.Wcf.Model.dll" />
+    <Path Id="8b385afb-5690-41d5-b275-db254210989d.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/WPW.Demo.Wcf/WPW.Demo.Wcf.Model/bin/Debug/WPW.Demo.Wcf.Model.dll" />
+    <Path Id="a99ebb5b-bbcd-4719-9d16-cfc47f6f78c8.OutputPath" Value="D:\TeamCode\etaoshi\wcf\WPW.Demo.Wcf\Wpw.Demo.Wcf.Web\bin\Wpw.Demo.Wcf.Web.dll" />
+    <Path Id="a99ebb5b-bbcd-4719-9d16-cfc47f6f78c8.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/WPW.Demo.Wcf/Wpw.Demo.Wcf.Web/bin/Wpw.Demo.Wcf.Web.dll" />
+    <Path Id="b6c58ecb-1d46-48ca-b665-5b0292e79150.OutputPath" Value="D:\TeamCode\etaoshi\wcf\wcf.monitor\WcfStatisticsServiceTest\bin\Debug\WcfStatisticsServiceTest.exe" />
+    <Path Id="b6c58ecb-1d46-48ca-b665-5b0292e79150.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/wcf.monitor/WcfStatisticsServiceTest/bin/Debug/WcfStatisticsServiceTest.exe" />
+    <Path Id="d3dd1e33-76c0-4e03-9272-be60bf5aaa01.OutputPath" Value="D:\TeamCode\etaoshi\wcf\wcf.monitor\WcfStatistics.Model\bin\Debug\WcfStatistics.Model.dll" />
+    <Path Id="d3dd1e33-76c0-4e03-9272-be60bf5aaa01.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/wcf.monitor/WcfStatistics.Model/bin/Debug/WcfStatistics.Model.dll" />
+    <Path Id="dd150e2a-8ee0-4098-98da-ca533dfc64a4.OutputPath" Value="D:\TeamCode\etaoshi\wcf\WPW.Demo.Wcf\WPW.Demo.Wcf.Interface\bin\Debug\WPW.Demo.Wcf.Interface.dll" />
+    <Path Id="dd150e2a-8ee0-4098-98da-ca533dfc64a4.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/WPW.Demo.Wcf/WPW.Demo.Wcf.Interface/bin/Debug/WPW.Demo.Wcf.Interface.dll" />
+    <Path Id="eab20ccf-d973-497a-96d9-a3d198f2ab27.OutputPath" Value="D:\TeamCode\etaoshi\wcf\wcf.monitor\WcfStatistics.Dao\bin\Debug\WcfStatistics.Dao.dll" />
+    <Path Id="eab20ccf-d973-497a-96d9-a3d198f2ab27.OutputPathUri" Value="file:///D:/TeamCode/etaoshi/wcf/wcf.monitor/WcfStatistics.Dao/bin/Debug/WcfStatistics.Dao.dll" />
+  </Paths>
+</DirectedGraph>

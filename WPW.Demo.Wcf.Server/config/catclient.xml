@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<doc>
+  <domain id="WcfServer" ip="172.16.24.17" enabled="true" />
+  <servers>
+    <server ip="172.16.0.10" port="2280" enabled="true" />
+  </servers>
+</doc>

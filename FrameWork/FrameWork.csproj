@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{37010614-A710-4B87-BA74-0487B8E3ED0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Eltc.Base.FrameWork</RootNamespace>
+    <AssemblyName>Eltc.Base.FrameWork</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\x86\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\CommonWcfBll.cs" />
+    <Compile Include="Helper\WcfClient.cs" />
+    <Compile Include="Helper\WcfServer.cs" />
+    <Compile Include="Helper\Wcf\BaseSetting.cs" />
+    <Compile Include="Helper\Wcf\InitConfig.cs" />
+    <Compile Include="Helper\Wcf\InstanceConfig.cs" />
+    <Compile Include="Helper\Wcf\LoadBalance\BalanceAlgorithmBase.cs" />
+    <Compile Include="Helper\Wcf\LoadBalance\ConsistentHashing.cs" />
+    <Compile Include="Helper\Wcf\LoadBalance\HeatBeat.cs" />
+    <Compile Include="Helper\Wcf\LoadBalance\IHeatBeat.cs" />
+    <Compile Include="Helper\Wcf\Monitor\IMonitorControl.cs" />
+    <Compile Include="Helper\Wcf\Monitor\LinkModel.cs" />
+    <Compile Include="Helper\Wcf\Monitor\MonitorClient.cs" />
+    <Compile Include="Helper\Wcf\Monitor\MonitorControl.cs" />
+    <Compile Include="Helper\Wcf\Monitor\MonitorData.cs" />
+    <Compile Include="Helper\Wcf\Monitor\PCData.cs" />
+    <Compile Include="Helper\Wcf\SDMessageHeader\ClientMessageInspector.cs" />
+    <Compile Include="Helper\Wcf\SDMessageHeader\HeaderContext.cs" />
+    <Compile Include="Helper\Wcf\SDMessageHeader\HeaderOperater.cs" />
+    <Compile Include="Helper\Wcf\SerializeBehavior\BinaryFormatterBehavior.cs" />
+    <Compile Include="Helper\Wcf\WcfCacheData.cs" />
+    <Compile Include="Helper\Wcf\WcfClentSetting.cs" />
+    <Compile Include="Helper\Wcf\WcfClentConstantSettingConfig.cs" />
+    <Compile Include="Helper\Wcf\WcfClentSettingConfig.cs" />
+    <Compile Include="Helper\Wcf\WcfConstantSettingConfig.cs" />
+    <Compile Include="Helper\Wcf\WcfLoadBalanceStandardProxy.cs" />
+    <Compile Include="Helper\Wcf\WcfParameterInspector.cs" />
+    <Compile Include="Helper\Wcf\WcfPool.cs" />
+    <Compile Include="Helper\Wcf\WcfPoolCache.cs" />
+    <Compile Include="Helper\Wcf\WcfServiceSetting.cs" />
+    <Compile Include="Helper\Wcf\WcfSettingConfig.cs" />
+    <Compile Include="Helper\Wcf\WcfStandardProxy.cs" />
+    <Compile Include="Helper\XmlHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
